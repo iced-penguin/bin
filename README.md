@@ -27,4 +27,12 @@ bash setup.sh
 
 ## Description
 
+### churl
 
+Convert URLs of images stored in Google Drive to a format that can be embedded directly into your blog.
+
+```
+churl [url]
+```
+
+If you use Mac OS, the generated URL is save to the clipboard at the same time.

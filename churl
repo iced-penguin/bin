@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "usage: $0 [url]"
+  exit 1
+fi
+
+if [[ $1 =~ https://drive\.google\.com/open\?id=.+ ]]; then
+  ID=$(echo $1 | sed -e "s/https:\/\/drive\.google\.com\/open\?id=//")
+elif [[ $1 =~ https://drive\.google\.com/file/d/.+/view\?usp=sharing ]]; then
+  ID=$(echo $1 | sed -e "s/https:\/\/drive\.google\.com\/file\/d\///" | sed -e "s/\/view\?usp=sharing//")
+else
+  echo "Url format must be"
+  echo https://drive.google.com/open?id={id}
+  echo or
+  echo https://drive.google.com/file/d/{id}/view?usp=sharing
+  exit 1
+fi
+
+URL='http://drive.google.com/uc?export=view&id='$ID
+
+# for Mac
+# copy url to clipboard
+if [[ $(uname) = 'Darwin' ]]; then
+  echo -n $URL | pbcopy
+fi
+
+echo $URL
