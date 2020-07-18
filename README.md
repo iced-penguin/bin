@@ -37,11 +37,18 @@ churl [url]
 
 If you use Mac OS, the generated URL is save to the clipboard at the same time.
 
+Example:
+
+```
+$ churl https://drive.google.com/open?id=123456789
+http://drive.google.com/uc?export=view&id=123456789
+```
+
 ### gitroot
 
-Use this command in your git repository. it shows the root directory which contains `.git`
+Use this command in your git repository. It shows the root directory which contains `.git`
 
-example: 
+Example: 
 
 In `/Users/swimpenguin/demo/src/main/com/example/demo`, 
 
