@@ -29,10 +29,23 @@ bash setup.sh
 
 ### churl
 
-Convert URLs of images stored in Google Drive to a format that can be embedded directly into your blog.
+This command converts URLs of images stored in Google Drive to a format that can be embedded directly into your blog.
 
 ```
 churl [url]
 ```
 
 If you use Mac OS, the generated URL is save to the clipboard at the same time.
+
+### gitroot
+
+Use this command in your git repository. it shows the root directory which contains `.git`
+
+example: 
+
+In `/Users/swimpenguin/demo/src/main/com/example/demo`, 
+
+```
+$ gitroot
+/Users/swimpenguin/demo
+```
