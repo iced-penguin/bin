@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [ $@ -ne 0 ]; then
+  echo "findroot: too many arguments"
+  echo "usage: findroot"
+fi
+
+# $1 パス
+function is_root() {
+  FILES=("$(ls -a $1)")
+  FLAG=false
+  for file in $FILES; do
+    if [ $file = '.git' ]; then
+      FLAG=true
+    fi
+  done
+  echo $FLAG
+}
+
+DIR=$(pwd)
+IS_ROOT=false
+
+while [ $DIR != '/' -a $IS_ROOT = false ]
+do
+  IS_ROOT=$(is_root $DIR)
+  DIR=$(dirname $DIR)
+done
+
+if [ $IS_ROOT = false ]; then
+  echo "findroot: you are not in git repository"
+  exit 1
+fi
+
+echo $DIR
