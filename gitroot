@@ -23,7 +23,9 @@ IS_ROOT=false
 while [ $DIR != '/' -a $IS_ROOT = false ]
 do
   IS_ROOT=$(is_root $DIR)
-  DIR=$(dirname $DIR)
+  if [ $IS_ROOT = false ]; then
+    DIR=$(dirname $DIR)
+  fi
 done
 
 if [ $IS_ROOT = false ]; then
