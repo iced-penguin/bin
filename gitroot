@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $@ -ne 0 ]; then
+if [ $# -ne 0 ]; then
   echo "findroot: too many arguments"
   echo "usage: findroot"
 fi
