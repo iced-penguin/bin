@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 0 ]; then
-  echo "findroot: too many arguments"
+  echo "gitroot: too many arguments"
   echo "usage: findroot"
 fi
 
@@ -29,7 +29,7 @@ do
 done
 
 if [ $IS_ROOT = false ]; then
-  echo "findroot: you are not in git repository"
+  echo "gitroot: you are not in git repository"
   exit 1
 fi
 
