@@ -17,7 +17,7 @@ else
   exit 1
 fi
 
-URL='http://drive.google.com/uc?export=view&id='$ID
+URL='https://drive.google.com/uc?export=view&id='$ID
 
 # for Mac
 # copy url to clipboard
