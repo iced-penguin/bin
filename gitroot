@@ -1,36 +1,34 @@
 #!/bin/bash
 
-if [ $# -ne 0 ]; then
-  echo "gitroot: too many arguments"
-  echo "usage: gitroot"
-fi
-
-# $1 パス
-function is_root() {
-  FILES=("$(ls -a $1)")
-  FLAG=false
-  for file in $FILES; do
-    if [ $file = '.git' ]; then
-      FLAG=true
-    fi
-  done
-  echo $FLAG
+usage() {
+  echo "Usage: gitroot"
+  exit 1
 }
 
-DIR=$(pwd)
-IS_ROOT=false
-
-while [ $DIR != '/' -a $IS_ROOT = false ]
-do
-  IS_ROOT=$(is_root $DIR)
-  if [ $IS_ROOT = false ]; then
-    DIR=$(dirname $DIR)
+# $1: パス
+# 与えられたパスがgitルートであるかどうか判定
+is_git_root() {
+  local -r dir=$1
+  if [[ -d "$dir/.git" ]]; then
+    return 0
+  else
+    return 1
   fi
-done
+}
 
-if [ $IS_ROOT = false ]; then
-  echo "gitroot: you are not in git repository"
-  exit 1
+if [ $# -ne 0 ]; then
+  usage
 fi
 
-echo $DIR
+CURRENT_DIR=$(pwd)
+
+# gitルートが見つかるまでディレクトリツリーを上にたどる
+while [[ $CURRENT_DIR != "/" ]]; do
+  if is_git_root $CURRENT_DIR; then
+    echo $CURRENT_DIR
+    exit 0
+  fi
+  CURRENT_DIR=$(dirname $CURRENT_DIR)
+done
+
+exit 1
