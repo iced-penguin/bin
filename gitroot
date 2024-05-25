@@ -1,4 +1,6 @@
 #!/bin/bash
+# カレントディレクトリがgitリポジトリ内にあるならばgitルートのパスを表示する
+# gitリポジトリ内でなければエラー終了
 
 usage() {
   echo "Usage: gitroot"
