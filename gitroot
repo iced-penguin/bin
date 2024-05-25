@@ -16,19 +16,23 @@ is_git_root() {
   fi
 }
 
-if [ $# -ne 0 ]; then
-  usage
-fi
-
-CURRENT_DIR=$(pwd)
-
-# gitルートが見つかるまでディレクトリツリーを上にたどる
-while [[ $CURRENT_DIR != "/" ]]; do
-  if is_git_root $CURRENT_DIR; then
-    echo $CURRENT_DIR
-    exit 0
+main() {
+  if [ $# -ne 0 ]; then
+    usage
   fi
-  CURRENT_DIR=$(dirname $CURRENT_DIR)
-done
+  
+  local current_dir=$(pwd)
+  
+  # gitルートが見つかるまでディレクトリツリーを上にたどる
+  while [[ $current_dir != "/" ]]; do
+    if is_git_root $current_dir; then
+      echo $current_dir
+      exit 0
+    fi
+    current_dir=$(dirname $current_dir)
+  done
+  
+  exit 1
+}
 
-exit 1
+main $@
