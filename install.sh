@@ -1,6 +1,6 @@
 #!/bin/bash
 
-include_files=("gitroot" "transpose")
+include_files=("transpose")
 
 for file in "${include_files[@]}"; do
   # ファイルが存在したら実行可能にしてシンボリックリンクを貼る
