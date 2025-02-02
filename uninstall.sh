@@ -1,6 +1,6 @@
 #!/bin/bash
 
-include_files=("gitroot")
+include_files=("gitroot" "transpose")
 
 for file in "${include_files[@]}"; do
   # /usr/local/binにシンボリックリンクが存在したら削除

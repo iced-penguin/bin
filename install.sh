@@ -1,12 +1,17 @@
 #!/bin/bash
 
-include_files=("gitroot")
+include_files=("gitroot" "transpose")
 
 for file in "${include_files[@]}"; do
   # ファイルが存在したら実行可能にしてシンボリックリンクを貼る
   if [[ -e "$file" ]]; then
-    chmod 744 "$file"
-    ln -s "$(pwd)/$file" /usr/local/bin
-    echo "$file installed."
+    if which "$file" >/dev/null; then
+      echo "$file is already installed."
+      continue
+    else
+      chmod 744 "$file"
+      ln -s "$(pwd)/$file" /usr/local/bin
+      echo "$file installed."
+    fi
   fi
 done
