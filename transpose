@@ -1,0 +1,42 @@
+#!/bin/bash
+
+function usage() {
+  echo "Usage: transpose [-d delimiter] <input>"
+  echo
+  echo "Description:"
+  echo "Transpose the input from rows to columns, or vice versa."
+  echo
+  echo "Options:"
+  echo "  -d delimiter  Specify the delimiter to use (default is ',')"
+  echo "  -h, --help    Show this help message and exit"
+  echo
+  echo "Examples:"
+  echo "  echo 'a b c d' | transpose -d ' '"
+}
+
+delimiter=","
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -d)
+    delimiter="$2"
+    shift 2
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Unknown parameter: $1" >&2
+    usage
+    exit 1
+    ;;
+  esac
+done
+
+input=$(cat /dev/stdin)
+if [[ "$input" == *"$delimiter"* ]]; then
+  echo "$input" | tr "$delimiter" "\n"
+else
+  result=$(echo "$input" | tr "\n" "$delimiter")
+  echo "${result%"$delimiter"}"
+fi
